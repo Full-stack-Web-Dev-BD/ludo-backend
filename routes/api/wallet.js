@@ -17,14 +17,22 @@ router.post('/', (req, res) => {
 	if (!req.body.wallet || !req.body.name) {
 		return res.status(400).json({ message: "Wallet address and name required !!" })
 	}
-	const newRequest = new Wallet({
-		wallet: req.body.wallet,
-		name: req.body.name,
-		details: req.body.details,
-	});
-	newRequest.save()
-		.then(request => res.json(request))
-		.catch(err => res.json(err));
+	Wallet.find({ wallet: req.body.wallet })
+		.then(doc => {
+			console.log(doc)
+			if (doc.length>0) {
+				return res.json({ status: true, message:"Request already sent !!" })
+			} else {
+				const newRequest = new Wallet({
+					wallet: req.body.wallet,
+					name: req.body.name,
+					details: req.body.details,
+				});
+				newRequest.save()
+					.then(request => res.json(request))
+					.catch(err => res.json(err));
+			}
+		})
 })
 
 

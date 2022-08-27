@@ -5,9 +5,13 @@ const passport=require('passport');
 const users=require('./routes/api/users');
 const wallet=require('./routes/api/wallet');
 const  morgan = require('morgan')
+const  cors = require('cors')
+
 
 const app=express();
 app.use(morgan('dev'))
+app.use(cors())
+
 const port=process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({extended:false}));
