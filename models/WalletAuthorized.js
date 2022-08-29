@@ -24,4 +24,4 @@ const walletSchema = new Schema({
 	}
 })
 
-module.exports = WalletAuthorized = mongoose.model('walletAuthorized', walletSchema);
+module.exports = WalletAuthorized = mongoose.model('walletAuthorized01', walletSchema);
